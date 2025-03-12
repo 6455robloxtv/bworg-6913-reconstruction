@@ -536,9 +536,9 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
                                 nigger:{
-                                    name:"Niggerify",
+                                    name:"Demin Lover",
                                     callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING? Ok. Here it goes!"})
                                         setTimeout(()=>{
 
                                         socket.emit("command",{list:["nigger",""]})

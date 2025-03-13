@@ -536,19 +536,19 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
                                 nigger:{
-                                    name:"Niggerify",
+                                    name:"Tell to shut up",
                                     callback:function(){
                                         socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
                                         setTimeout(()=>{
 
-                                        socket.emit("command",{list:["nigger",""]})
+                                        socket.emit("talk",{text:"Shut up!"})
                                         },2000)
                                     }
                                 },
                                 kys:{
-                                    name:"Ask to KYS",
+                                    name:"Ask to Stop being a kiddie",
                                     callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
+                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" stop being a kiddie!"})
                                     }
                                 },
 

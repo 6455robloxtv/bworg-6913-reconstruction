@@ -534,14 +534,7 @@ name:"Pastule",
 callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
-},
-                                nigger:{
-                                    name:"Tell to shut up",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" STFU!"})
-
-                                    }
-                                },
+},},
                                 kys:{
                                     name:"Ask to Stop being a kiddie",
                                     callback:function(){

@@ -538,11 +538,8 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                 nigger:{
                                     name:"Tell to shut up",
                                     callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
-                                        setTimeout(()=>{
+                                        socket.emit("talk",{text:d.userPublic.name+" STFU!"})
 
-                                        socket.emit("talk",{text:"Shut up!"})
-                                        },2000)
                                     }
                                 },
                                 kys:{

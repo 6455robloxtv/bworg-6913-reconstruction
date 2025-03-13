@@ -523,25 +523,7 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
-                                nigger:{
-                                    name:"Demin Lover",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING? Ok. Here it goes!"})
-                                        setTimeout(()=>{
 
-                                        socket.emit("command",{list:["nigger",""]})
-                                        },2000)
-                                    }
-                                },
-                                kys:{
-                                    name:"Call A Fatass",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+", You are a fatass!"})
-                                    }
-                                },
-
-    }
-},
 
                             mod:{
                                 name: "Gamer Mod CMDs",
@@ -639,22 +621,6 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
-                                nigger:{
-                                    name:"Niggerify",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
-                                        setTimeout(()=>{
-
-                                        socket.emit("command",{list:["nigger",""]})
-                                        },2000)
-                                    }
-                                },
-                                kys:{
-                                    name:"Ask to KYS",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
-                                    }
-                                },
 
     }
 },
@@ -785,23 +751,7 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
-                                nigger:{
-                                    name:"Niggerify",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
-                                        setTimeout(()=>{
-
-                                        socket.emit("command",{list:["nigger",""]})
-                                        },2000)
-                                    }
-                                },
-                                kys:{
-                                    name:"Ask to KYS",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
-                                    }
-                                },
-
+                            
     }
 },
 

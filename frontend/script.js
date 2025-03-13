@@ -631,7 +631,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                             }
 
                             },
-                        };
+                        }
                         } else if(authlevel == 1){
                                 return {
                             items: {

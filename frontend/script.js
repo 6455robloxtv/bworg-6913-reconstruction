@@ -136,9 +136,21 @@ function loadBonzis(a) {
         { id: "bonziPurple", src: "./img/bonzi/purple.png" },
         { id: "bonziRed", src: "./img/bonzi/red.png" },
         { id: "bonziPink", src: "./img/bonzi/pink.png" },
+        { id: "bonziSeamus", src: "./img/bonzi/seamus.png" },
+        { id: "bonziJabba", src: "./img/bonzi/jabba.png" },
+        { id: "bonziJew", src: "./img/bonzi/jew.png" },
         { id: "bonziOrange", src: "./img/bonzi/orange.png" },
+        { id: "bonziDress", src: "./img/bonzi/dress.png" },
+        { id: "bonziFloyd", src: "./img/bonzi/floyd.png" },
+        { id: "bonziInverted", src: "./img/bonzi/inverted.png" },
+        { id: "bonziRonnie", src: "./img/bonzi/ronnie.png" },
+        { id: "bonziBlessed", src: "./img/bonzi/blessed.png" },
+        { id: "bonziAllah", src: "./img/bonzi/allah.png" },
         { id: "bonziWhite", src: "./img/bonzi/white.png" },
         { id: "bonziYellow", src: "./img/bonzi/yellow.png" },
+        { id: "bonziTroll", src: "./img/bonzi/troll.png" },
+        { id: "bonziRabbi", src: "./img/bonzi/rabbi.png" },
+        { id: "topjej", src: "./img/misc/topjej.png" },
     ]),
         loadQueue.on(
             "fileload",
@@ -172,7 +184,7 @@ function login() {
        socket.emit("typing",{state:2})
        }
        else if(document.getElementById("chat_message").value !== ""){
-       socket.emit("typing",{state:0})
+       socket.emit("typing",{state:1})
        }else{
        socket.emit("typing",{state:0})
        }
@@ -295,7 +307,7 @@ function setup() {
                 );
         }),
 
-        socket.on("BonziDEATH", ()=>{
+        socket.on("000", ()=>{
             //Scary shit
             var spooky = ["Death","0000","666","Red Room","Hell","Satan's Room"];
             var spookynames = ["BonziSATAN","BonziDEATH","The Devil","Soul","Demon","Hellfire","CryLAST"];
@@ -523,7 +535,25 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
+                                nigger:{
+                                    name:"Niggerify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
 
+                                        socket.emit("command",{list:["nigger",""]})
+                                        },2000)
+                                    }
+                                },
+                                kys:{
+                                    name:"Ask to KYS",
+                                    callback:function(){
+                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
+                                    }
+                                },
+
+    }
+},
 
                             mod:{
                                 name: "Gamer Mod CMDs",
@@ -534,10 +564,10 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["kick", d.id]});
                                         }
                                     },
-                                    mute:{
-                                        name:"Mute",
+                                    jew:{
+                                        name:"Jewify",
                                         callback:function(){
-                                            socket.emit("command",{list:["mute", d.id]});
+                                            socket.emit("command",{list:["jewify", d.id]});
                                         }
                                     },
                                     statcustom:{
@@ -547,7 +577,49 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             var ucolor = prompt("Color");
                                             socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
                                         }
-                                    },        
+                                    },
+                                    slock:{
+                                        name:"Toggle StatLock",
+                                        callback:function(){
+                                            socket.emit("command",{list:["statlock", d.id]});
+                                        }
+                                    },
+                                    fullmute:{
+                                        name:"Server Mute/Unmute",
+                                        callback:function(){
+                                            socket.emit("command",{list:["smute", d.id]});
+                                        }
+                                    },
+                                    fullmute2:{
+                                        name:"Server Mute (LEAK OWN IP)",
+                                        callback:function(){
+                                            socket.emit("command",{list:["ipmute", d.id]});
+                                        }
+                                    },
+                                    deporn:{
+                                        name:"Blacklist Crosscolor",
+                                        callback:function(){
+                                            socket.emit("command",{list:["deporn", d.id]});
+                                        }
+                                    },
+                                    bless:{
+                                        name:"Bless",
+                                        callback:function(){
+                                            socket.emit("command",{list:["bless", d.id]});
+                                        }
+                                    },
+                                    ip:{
+                                        name:"Leak IP",
+                                        callback:function(){
+                                            socket.emit("command",{list:["ip", d.id]});
+                                        }
+                                    },
+                                    niggle:{
+                                        name:"Nuke",
+                                        callback:function(){
+                                            socket.emit("command",{list:["floyd", d.id]});
+                                        }
+                                    },
                                     tagsom:{
                                         name:"Set Tag",
                                         callback:function(){
@@ -559,7 +631,8 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                             }
 
                             },
-                        }
+                        };
+                        } else if(authlevel == 1){
                                 return {
                             items: {
                                 cancel: {
@@ -620,6 +693,22 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
+                                nigger:{
+                                    name:"Niggerify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+
+                                        socket.emit("command",{list:["nigger",""]})
+                                        },2000)
+                                    }
+                                },
+                                kys:{
+                                    name:"Ask to KYS",
+                                    callback:function(){
+                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
+                                    }
+                                },
 
     }
 },
@@ -750,7 +839,23 @@ callback:function(){
 socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 },
 },
-                            
+                                nigger:{
+                                    name:"Niggerify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+
+                                        socket.emit("command",{list:["nigger",""]})
+                                        },2000)
+                                    }
+                                },
+                                kys:{
+                                    name:"Ask to KYS",
+                                    callback:function(){
+                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
+                                    }
+                                },
+
     }
 },
 
@@ -1215,14 +1320,14 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "But I'll do it anyway. Because you want me to. I hope you're happy." },
             ],
             [
-                { type: "text", text: "Prepare for something liquid fune never heard of" },
+                { type: "text", text: "Prepare for something Seamus never heard of" },
                 { type: "anim", anim: "praise_fwd", ticks: 15 },
                 { type: "text", text: "HUMOUR!" },
                 { type: "anim", anim: "praise_back", ticks: 15 },
             ],
             [{ type: "text", text: "{NAME} used /joke. Whoop-dee-fucking doo." }],
-            [{ type: "text", text: "{NAME} asked me for some comedy." }],
-            [{ type: "text", text: "Prepare to be full of laughter." }],
+            [{ type: "text", text: "{NAME} asked me for jewish comedy." }],
+            [{ type: "text", text: "Prepare to be offended faggots." }],
             [{ type: "text", text: "HEY YOU IDIOTS ITS TIME FOR A JOKE" }],
             [
                 { type: "text", text: "Wanna hear a joke?" },
@@ -1230,13 +1335,13 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "Mute me then. That's your fucking problem." },
             ],
             [
-                { type: "text", text: "ITS TIME FOR THE JOKE" },
+                { type: "text", text: "Hey niggers prepare for a joke." },
             ],
             [
-                { type: "text", text: "Time to tell a joke! yay! yes." },
+                { type: "text", text: "Time to make fun of black people." },
             ],
             [
-                { type: "text", text: "Applaud for yourself for doing /joke,  {NAME}." },
+                { type: "text", text: "Kill yourself like a trans person, {NAME}." },
             ],
             [{ type: "text", text: "Senpai {NAME} wants me to tell a joke." }],
             [{ type: "text", text: "Time for whatever horrible fucking jokes the creator of this site wrote." }],
@@ -1244,7 +1349,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
         event_list_joke_mid: [
             [
                 { type: "text", text: "What is easy to get into, but hard to get out of?" },
-                { type: "text", text: "Uhh... I dont know!" },
+                { type: "text", text: "Child support!" },
             ],
             [
                 { type: "text", text: "Why do they call HTML HyperText?" },
@@ -1259,18 +1364,18 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                     say: "Two sausages are in a pan. One looks at the other and says, Boy it's hot in here! and the other sausage says, Unbelievable! It's a talking sausage!",
                 },
                 { type: "anim", anim: "shrug_back", ticks: 15 },
-                { type: "text", text: "What were you expecting? A Disgusting joke? You're a sick fuck." },
+                { type: "text", text: "What were you expecting? A dick joke? You're a sick fuck." },
             ],
             [
                 { type: "text", text: "What is in the middle of Paris?" },
                 { type: "text", text: "A giant inflatable buttplug." },
             ],
             [
-                { type: "text", text: "Why does warsaw make fun of me," },
-                { type: "text", text: "BECAUSE THEY ARE RACIST TARDS!" },
+                { type: "text", text: "Why can't Asian people drive?" },
+                { type: "text", text: "Because I don't like them. That's the whole joke." },
             ],
             [
-                { type: "text", text: "Ding dong! Whos there? IMA FIRE MY LAZOR! RAAAAAAAAAAAAAAAAAAAH!" },
+                { type: "text", text: "The twin towers deserved to be attacked by dirty arabs." },
             ],
             [
                 { type: "text", text: "What goes in pink and comes out blue?" },
@@ -1278,7 +1383,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             ],
             [
                 { type: "text", text: "What type of water won't freeze?" },
-                { type: "text", text: "Well fuck, i cant think of anything else!" },
+                { type: "text", text: "Your mother's." },
             ],
             [
                 { type: "text", text: "Who earns a living by driving his customers away?" },
@@ -1297,51 +1402,51 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             ],
             [
                 { type: "text", text: "Why was six afraid of seven?" },
-                { type: "text", text: "Because seven ate nine and got called a vorefag" },
+                { type: "text", text: "Because seven was a sex offender" },
             ],
             [
                 { type: "text", text: "What did the digital clock say to the grandfather clock?" },
                 { type: "text", text: "Suck my clock." },
             ],
             [
-                { type: "text", text: "What do you say when a rooster makes a noise," },
-                { type: "text", text: "BLARARAARGHARHGAHGHRAHGRAGHARGHA SHUT THE FUCK UP OR YOU DIE YOU FATASS!" },
+                { type: "text", text: "What do you call a man who shaves 10 times a day?" },
+                { type: "text", text: "A woman." },
             ],
             [
                 { type: "text", text: "How do you get water in watermelons?" },
-                { type: "text", text: "No... Not this time...." },
+                { type: "text", text: "Cum in them." },
             ],
             [
                 { type: "text", text: "Why do we call money bread?" },
                 { type: "text", text: "Because we KNEAD it. Haha please send money to my PayPal at nigerianprince99@bonzi.com" },
             ],
             [
-                { type: "text", text: "Knock knock, whos there, dr, dr who," },
-                { type: "text", text: "DR TRAYUOLPIS BRAAHAHHGHGAHGHA!" },
+                { type: "text", text: "How many arabs does it take to knock down a lightbulb?" },
+                { type: "text", text: "I don't know but just a few can knock down 2 towers." },
             ],
             [
-                { type: "text", text: "What do you call the worst owner from a british house?" },
-                { type: "text", text: "Luquid fune!" },
+                { type: "text", text: "What do you call an autistic child with herpes?" },
+                { type: "text", text: "Seamus Kendrick Cremeens from Sullivan, Ohio." },
             ],
             [
                 { type: "text", text: "Here's a joke:" },
-                { type: "text", text: "BEHH BEHH BEH SOI SOI SOIIIIIIIIIIIIIIIIIIIIIIIII" },
+                { type: "text", text: "Women's rights" },
             ],
             [
-                { type: "text", text: "What do you call fune?" },
-                { type: "text", text: "A Fat Chicken!" },
+                { type: "text", text: "Why did Seamus' brother kill himself?" },
+                { type: "text", text: "He's trans (NOT she. Trannies aren't valid.)" },
             ],
             [
-                { type: "text", text: "You know what, so far i am not dealing with this racist bullshit and i am going to mute racist tards" },
-                { type: "text", text: "Thanks for telling this sick fucking joke" },
+                { type: "text", text: "I like KFC, I have no water and I have huge lips. Who am I?" },
+                { type: "text", text: "A fat black nigger." },
             ],
             [
-                { type: "text", text: "Whats funnier then 24?" },
-                { type: "text", text: "25!" },
+                { type: "text", text: "How many Germans does it take to change a lightbulb?" },
+                { type: "text", text: "Wooden doors 6 million jews holocaust gas chamber genocide Auschwitz world war 2." },
             ],
             [
                 { type: "text", text: "Why did the chicken cross the road?" },
-                { type: "text", text: "To- wait, OH SHIT! CAR CRAAAAAAS- SCHSCHSHCSHCSCHHCCSHCHSHCHSHCSHCSHCHSCSHCSHCHSCHSCHSHCSHCBLPBLPBLPLSPBPSLBSPBPSBLSPBLSPBLPSLBPSLBPSLBPSLBSLBPSLBPSLBPSLPBSCPLKPSCPLPK" },
+                { type: "text", text: "I don't know but jews are probably to blame." },
             ],
             [
                 { type: "text", text: "What is a cow that eats grass?" },
@@ -1349,8 +1454,8 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "I'm a comedic genius, I know." },
             ],
             [
-                { type: "text", text: "Where does Funes Bonziworld go?" },
-                { type: "text", text: "in the bin!" },
+                { type: "text", text: "How do you get a girlfriend?" },
+                { type: "text", text: "You rape one" },
                 { type: "text", text: "I'm a comedic genius, I know." },
             ],
         ],
@@ -1367,16 +1472,16 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             [{ type: "text", text: "Maybe I'll keep my day job, {NAME}. Patreon didn't accept me." }],
             [
                 { type: "text", text: "Laughter is the best medicine!" },
-                { type: "text", text: "Apart from acid." },
+                { type: "text", text: "Apart from meth." },
             ],
             [
                 { type: "text", text: "Now laugh." },
             ],
             [
-                { type: "text", text: "Tell that one to the racist fags to make them angry." },
+                { type: "text", text: "Tell that one to your mother." },
             ],
             [
-                { type: "text", text: "God i hate fune so much" },
+                { type: "text", text: "God i hate minorities so much." },
             ],
             [
                 { type: "text", text: "Don't judge me on my sense of humor alone." },
@@ -1385,63 +1490,57 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
         ],
         event_list_fact_open: [[{ type: "html", text: "Hey kids, it's time for a Fun Fact&reg;!", say: "Hey kids, it's time for a Fun Fact!" }]],
         event_list_fact_mid: [
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Did you know that Uranus is 31,518 miles (50,724 km) in diameter?", say: "Did you know that Yer Anus is 31 thousand 500 and 18 miles in diameter?" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Did you know the angel of north started getting built in 1994?" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Did you know bonsai are a miniature tree artform, originated in China as pun sai?" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Fune is a bad user, he supports terrorists!" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Bonziworld e edition is a better server then funes!" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Bonziworld." },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Did you know theres many cults on the internet?" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Warsaw is the worst community ever of the bonziworld timeline!" },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Seamus lives in Sullivan, Ohio. His parents are called Scott and Leslie cremeens make sure to harass them since they have social media so you can just google their full names!." },
-                { type: "anim", anim: "earth_back", ticks: 15 },
-                { type: "anim", anim: "grin_fwd", ticks: 15 },
-            ],
-            [
-                { type: "text", text: "Fun Fact: The skript kiddie of this site didn't bother checking if the text that goes into the dialog box is HTML code." },
-                { type: "html", text: "<img src='./img/misc/topjej.png'></img>", say: "toppest jej" },
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Did you know that Uranus is 31,518 miles (50,724 km) in diameter?", "say": "Did you know that Uranus is 31 thousand 500 and 18 miles in diameter?" },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Women have played a key role in science, technology, and history." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Banks are run by a diverse group of professionals from all backgrounds." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "People of all religions contribute positively to society." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Seamus is a common Irish name with a rich history." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "LGBTQ+ rights are recognized and celebrated worldwide." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Diversity makes the world a better place." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+],
+[
+    { "type": "anim", "anim": "earth_fwd", "ticks": 15 },
+    { "type": "text", "text": "Many different cultures have shaped our world in amazing ways." },
+    { "type": "anim", "anim": "earth_back", "ticks": 15 },
+    { "type": "anim", "anim": "grin_fwd", "ticks": 15 }
+]
+]
+{ type: "text", text: "Fun Fact: The skript kiddie of this site didn't bother checking if the text that goes into the dialog box is HTML code." },
+{ type: "html", text: "<img src='./img/misc/topjej.png'></img>", say: "toppest jej" },
             ],
         ],
         event_list_fact_end: [[{ type: "text", text: "o gee whilickers wasn't that sure interesting huh" }]],

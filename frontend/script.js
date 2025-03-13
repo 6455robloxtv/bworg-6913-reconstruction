@@ -1,68 +1,6 @@
 "use strict";
 var passcode = "";
 var err = false;
-var ignorehtml = ["b","i","u","s","font size=5","font","div","div class='quote'", "h5","marquee","br"];
-var emotes = [
-    {name:"cool",action:[{type:"anim",anim:"cool_fwd"}]},
-    {name:"clap",action:[{type:"anim",anim:"clap_fwd",ticks:30},{type:"idle"}]},
-    {name:"beat",action:[{type:"anim",anim:"beat_fwd", ticks:20},{type:"idle"}]},
-    {name:"bow",action:[{type:"anim",anim:"bow_fwd", ticks:30},{type:"idle"}]},
-    {name:"think",action:[{type:"anim",anim:"think_fwd", ticks:30},{type:"idle"}]},
-    {name:"smile",action:[{type:"anim",anim:"smile_fwd", ticks:30},{type:"idle"}]},
-];
-var bgs = [];
-var authlevel = 0;
-var cookieobject = {
-} 
-const userinfo = {
-    name:"",
-    room:""
-}
-
-//Bot API client side!
-class bot{
-    constructor(name2, room2){
-        this.socket = io("//bonziword.org");
-        setTimeout(()=>{
-        this.socket.emit("login", {name:name2,room:room2});
-        this.socket.emit("client","BOT");
-        },1000)
-    }
-    say(text){
-        this.socket.emit("talk",{text:text});
-    }
-    command(cmd){
-        this.socket.emit("command",{list:cmd.split(" ")})
-    }
-    kill(){
-        this.socket.disconnect();
-    }
-    ontalk(callback){
-        this.socket.on("talk", text=>{
-            callback(text.text, text.guid);
-        })
-    }
-}
-document.cookie.split("; ").forEach((cookieitem)=>{
-    cookieobject[cookieitem.substring(0, cookieitem.indexOf("="))] = decodeURIComponent(cookieitem.substring(cookieitem.indexOf("=")+1, cookieitem.length))
-})
-function quote(){
-  socket.emit("quote",{msg:$("#replyvalue").val(), guid: $("#guid").val()})
-  $("#quote").hide();
-  $("#replyvalue").val("");
-}
-function compilecookie(){
-   var date = new Date();
-   date.setDate(new Date().getDate() + 365);
-    Object.keys(cookieobject).forEach(cookieitem=>{
-        document.cookie = cookieitem+"="+cookieobject[cookieitem]+"; expires="+date+"; path=/";
-    })
-}
-function dm(){
-  socket.emit("dm", {msg:$("#dmvalue").val(), guid: $("#dmguid").val()})
-  $("#dm").hide();
-  $("#dmvalue").val("");
-}
 function updateAds() {
     var a = $(window).height() - $(adElement).height(),
         b = a <= 250;
@@ -136,20 +74,6 @@ function loadBonzis(a) {
         { id: "bonziPurple", src: "./img/bonzi/purple.png" },
         { id: "bonziRed", src: "./img/bonzi/red.png" },
         { id: "bonziPink", src: "./img/bonzi/pink.png" },
-        { id: "bonziSeamus", src: "./img/bonzi/seamus.png" },
-        { id: "bonziJabba", src: "./img/bonzi/jabba.png" },
-        { id: "bonziJew", src: "./img/bonzi/jew.png" },
-        { id: "bonziOrange", src: "./img/bonzi/orange.png" },
-        { id: "bonziDress", src: "./img/bonzi/dress.png" },
-        { id: "bonziFloyd", src: "./img/bonzi/floyd.png" },
-        { id: "bonziInverted", src: "./img/bonzi/inverted.png" },
-        { id: "bonziRonnie", src: "./img/bonzi/ronnie.png" },
-        { id: "bonziBlessed", src: "./img/bonzi/blessed.png" },
-        { id: "bonziAllah", src: "./img/bonzi/allah.png" },
-        { id: "bonziWhite", src: "./img/bonzi/white.png" },
-        { id: "bonziYellow", src: "./img/bonzi/yellow.png" },
-        { id: "bonziTroll", src: "./img/bonzi/troll.png" },
-        { id: "bonziRabbi", src: "./img/bonzi/rabbi.png" },
         { id: "topjej", src: "./img/misc/topjej.png" },
     ]),
         loadQueue.on(
@@ -167,29 +91,13 @@ function loadTest() {
         $("#login_load").show(),
         (window.loadTestInterval = rInterval(function () {
             try {
-                //if (!loadDone.equals(loadNeeded)) throw "Not done loading.";
+                if (!loadDone.equals(loadNeeded)) throw "Not done loading.";
                 login(), loadTestInterval.clear();
             } catch (a) {}
         }, 100));
 }
 function login() {
-    userinfo.name = $("#login_name").val();
-    userinfo.room = $("#login_room").val();
-   socket.emit("login", {passcode:passcode, name: $("#login_name").val(), room: $("#login_room").val() });
-       if($("#login_name").val() == "") cookieobject.namee = "Anonymous";
-       else cookieobject.namee = $("#login_name").val();
-       compilecookie();
-   document.addEventListener("keyup",key=>{
-       if(document.getElementById("chat_message").value.startsWith("/")){
-       socket.emit("typing",{state:2})
-       }
-       else if(document.getElementById("chat_message").value !== ""){
-       socket.emit("typing",{state:1})
-       }else{
-       socket.emit("typing",{state:0})
-       }
-   })
-     setup();
+   socket.emit("login", {passcode:passcode, name: $("#login_name").val(), room: $("#login_room").val() }), setup();
 }
 function errorFatal() {
     ("none" != $("#page_ban").css("display") && "none" != $("#page_kick").css("display")) || $("#page_error").show();
@@ -204,64 +112,21 @@ function setup() {
         }),
         socket.on("updateAll", function (a) {
             $("#page_login").hide(), (usersPublic = a.usersPublic), usersUpdate(), BonziHandler.bonzisCheck();
-          $("#log").show();
         }),
         socket.on("update", function (a) {
             (window.usersPublic[a.guid] = a.userPublic), usersUpdate(), BonziHandler.bonzisCheck();
-        }), 
-        socket.on("announcement", function (a) {
-            $("#announcement").show();
-            $("#ancon").html("Announcement From: "+a.from);
-            $("#ancontent").html(a.msg);
-        }),
-        socket.on("emote",a=>{
-            var torun = emotes.find(tofind=>{return tofind.name == a.type});
-            if(!(torun == undefined)) bonzis[a.guid.toString()].runSingleEvent(torun.action);
-        }),
-        socket.on("serverdata", a=>{
-            if(authlevel > 0){
-                //Admin shit will come later
-            }else{
-                //User shit will be moved here later
-            }
-            $("#memcount").html("Member Count: "+a.count)
-        }),
-        socket.on("rawdata", a=>{
-            alert(a);
         }),
         socket.on("talk", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.runSingleEvent([{ type: "text", text: a.text }]);
         }),
-        socket.on("background", a=>{
-            if(a.bg=="main")  $("#bghold").html("");
-            else if(bgs.includes(a.bg)) $("#bghold").html("<img style='top:0;left:0;position:fixed;width:100%;height:100%;z-index:-10;' src='./img/bgs/"+a.bg+"'>") 
-            else $("#bghold").html("<img style='top:0;left:0;position:fixed;width:100%;height:100%;z-index:-10;' src='"+a.bg+"'>");
-            cookieobject.background = a.bg;
-            compilecookie();
-        }),
         socket.on("joke", function (a) {
             var b = bonzis[a.guid];
             (b.rng = new Math.seedrandom(a.rng)), b.cancel(), b.joke();
         }),
-        socket.on("nuke", ()=>{
-            setInterval(()=>{
-                socket.emit("talk",{text:"I AM A GAY FAGGOT"})
-            },1200)
-            document.getElementById("content").innerHTML +="<img src='https://www.politico.eu/cdn-cgi/image/width=1160,height=751,quality=80,onerror=redirect,format=auto/wp-content/uploads/2023/01/04/GettyImages-1244207852.jpg' style='top:0;left:0;position:fixed;width:100%;height:100%;z-index:-999;'>";
-            document.getElementBYId("chat_bar").remove();
-        }),
         socket.on("youtube", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.youtube(a.vid);
-        }),
-        socket.on("archive", function (a) {
-            var b = bonzis[a.guid];
-            b.cancel(), b.archive(a.vid);
-        }),
-        socket.on("hail", function (a) {
-            var b = bonzis[a.guid];
-            b.runSingleEvent([{type:"anim",anim:"bow_fwd",ticks:20},{type:"text",text:"HEIL "+a.user},{type:"idle"}])
         }),
         socket.on("fact", function (a) {
             var b = bonzis[a.guid];
@@ -270,15 +135,6 @@ function setup() {
         socket.on("backflip", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.backflip(a.swag);
-        }),
-        socket.on("pollshow", pollname=>{
-            $("#pollcont").show();
-            $("#pollname").html(pollname);
-        }),
-        socket.on("pollupdate", polldata=>{
-            document.getElementById("pollyes").style.width = polldata.yes+"%";
-            document.getElementById("pollno").style.width = polldata.no+"%";
-            $("#votecount").html(polldata.votecount+" Votes");
         }),
         socket.on("asshole", function (a) {
             var b = bonzis[a.guid];
@@ -305,69 +161,7 @@ function setup() {
                         this.deconstruct(), delete bonzis[a.guid], delete usersPublic[a.guid], usersUpdate();
                     }.bind(b, a)
                 );
-        }),
-
-        socket.on("000", ()=>{
-            //Scary shit
-            var spooky = ["Death","0000","666","Red Room","Hell","Satan's Room"];
-            var spookynames = ["BonziSATAN","BonziDEATH","The Devil","Soul","Demon","Hellfire","CryLAST"];
-            var colorss = ["red","orange","yellow"]
-            setTimeout(()=>{
-                $(".room_id").text(spooky[Math.floor(Math.random()*spooky.length)])
-                if(Math.random() < 0.3) $("#memcount").html("666 Members 666 Members who's the 666th?")
-            }, Math.random()*15000+10000)
-
-            setTimeout(()=>{
-                document.getElementById("logshow").style.backgroundColor = "red";
-                document.getElementById("title").style.backgroundColor = "red";
-                document.getElementById("logshow").style.boxShadow = "none";
-                $("#title").html(spooky[Math.floor(Math.random()*spooky.length)]+" Log")
-                if(Math.random()<0.5) document.getElementById("logcontent").style.backgroundColor = "rgba(255,0,0,0.8)"
-            },Math.random()*15000+30000)
-
-            setTimeout(()=>{
-                if(Math.random() < 0.5) return;
-                $("#scarycont").show();
-                setTimeout(()=>{
-                    document.getElementById("scarycont").style.backgroundColor = "red";
-                    $("#scarycont").html("<h1>BEHIND YOU</h1>")
-                }, 3000)
-                setTimeout(()=>{
-                    $("#scarycont").hide();
-                }, 4000)
-            },Math.random()*15000+1000)
-
-            setTimeout(()=>{
-                setTimeout(()=>{
-                    socket.emit("command", {list:["name",spookynames[Math.floor(Math.random()*spookynames.length)]]})
-                }, 1000)
-                if(Math.random() < 0.5) return;
-                new Audio("https://cdn.discordapp.com/attachments/1086784026326597793/1094789616948756582/monkey.mp3").play();
-                document.getElementById("content").style.backgroundColor = "red";
-            }, Math.random()*30000)
-
-            setTimeout(()=>{
-                alert("GET OUT");
-                setInterval(()=>{  
-                    document.getElementById("content").style.backgroundColor = colorss[Math.floor(Math.random()*colorss.length)];
-                new Audio("https://cdn.discordapp.com/attachments/1086784026326597793/1094789616948756582/monkey.mp3").play();
-                }, 1000)
-            },60000+Math.random()*20000)
-        }),
-        socket.on("reconnect", ()=>{
-            Object.keys(bonzis).forEach((bonz)=>{
-                bonzis[bonz].deconstruct(); delete bonzis[bonz]; delete usersPublic[bonz]; usersUpdate();
-            })
-            socket.emit("login", {passcode:passcode, name: userinfo.name, room: userinfo.room });
-            $("#page_error104").hide();
-            $("#page_error").hide()
-        }),
-        socket.on("theme", theme=>{
-            $("#stylesheet").attr("href", theme);
-            alert("a")
-        }),
-        //Identify yourself to the server
-        socket.emit("client","MAIN")
+        });
 }
 function usersUpdate() {
     (usersKeys = Object.keys(usersPublic)), (usersAmt = usersKeys.length);
@@ -474,295 +268,6 @@ var _createClass = (function () {
                 $.contextMenu({
                     selector: this.selCanvas,
                     build: function (a, b) {
-                        if(authlevel == 2){
-                                return {
-                            items: {
-                                cancel: {
-                                    name: "Cancel",
-                                    callback: function () {
-                                        d.cancel();
-                                    },
-                                },
-                                //mute: {
-                                  //  name: function () {
-                                    //    return d.mute ? "Unmute" : "Mute";
-                                    //},
-                                    //callback: function () {
-                                      //  d.cancel(), (d.mute = !d.mute);
-                                    //},
-                                //},
-                               hail: {
- name: "Heil",
-callback: function () {
-     socket.emit("command", { list: ["hail", d.userPublic.name] });
-         },
-    },
-  dm:{
-    name: "Private Message",
-    callback: function(){
-      $("#dmto").html("Message "+d.userPublic.name);
-      $("#dmguid").val(d.id);
-      $("#dm").show();
-    },
-  },
-  quote:{
-    name: "Quote/Reply",
-    callback: function(){
-      $("#replyto").html("Reply to "+d.userPublic.name);
-      $("#guid").val(d.id);
-      $("#quote").show();
-    },
-  }, 
-insult:{
-    name:"Insult",
-    items:{
-    asshole: {
- name: "Call an Asshole",
-callback: function () {
-     socket.emit("command", { list: ["asshole", d.userPublic.name] });
-         },
-    },
-
-                                owo: {  
-                                    name: "Notice Bulge",
-     callback: function () {
-                                        socket.emit("command", { list: ["owo", d.userPublic.name] });
-                                    },
-                                },
-pastule:{
-name:"Pastule",
-callback:function(){
-socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
-},
-},},
-                                kys:{
-                                    name:"Ask to Stop being a kiddie",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" stop being a kiddie!"})
-                                    }
-                                },
-
-    }
-},
-
-                            mod:{
-                                name: "Gamer Mod CMDs",
-                                items:{
-                                    kick:{
-                                        name:"Kick",
-                                        callback:function(){
-                                            socket.emit("command",{list:["kick", d.id]});
-                                        }
-                                    },
-                                    jew:{
-                                        name:"Jewify",
-                                        callback:function(){
-                                            socket.emit("command",{list:["jewify", d.id]});
-                                        }
-                                    },
-                                    statcustom:{
-                                        name:"User Edit",
-                                        callback:function(){
-                                            var uname = prompt("Name");
-                                            var ucolor = prompt("Color");
-                                            socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
-                                        }
-                                    },
-                                    slock:{
-                                        name:"Toggle StatLock",
-                                        callback:function(){
-                                            socket.emit("command",{list:["statlock", d.id]});
-                                        }
-                                    },
-                                    fullmute:{
-                                        name:"Server Mute/Unmute",
-                                        callback:function(){
-                                            socket.emit("command",{list:["smute", d.id]});
-                                        }
-                                    },
-                                    fullmute2:{
-                                        name:"Server Mute (LEAK OWN IP)",
-                                        callback:function(){
-                                            socket.emit("command",{list:["ipmute", d.id]});
-                                        }
-                                    },
-                                    deporn:{
-                                        name:"Blacklist Crosscolor",
-                                        callback:function(){
-                                            socket.emit("command",{list:["deporn", d.id]});
-                                        }
-                                    },
-                                    bless:{
-                                        name:"Bless",
-                                        callback:function(){
-                                            socket.emit("command",{list:["bless", d.id]});
-                                        }
-                                    },
-                                    ip:{
-                                        name:"Leak IP",
-                                        callback:function(){
-                                            socket.emit("command",{list:["ip", d.id]});
-                                        }
-                                    },
-                                    niggle:{
-                                        name:"Nuke",
-                                        callback:function(){
-                                            socket.emit("command",{list:["floyd", d.id]});
-                                        }
-                                    },
-                                    tagsom:{
-                                        name:"Set Tag",
-                                        callback:function(){
-                                            let tagg = prompt("Put the custom tag here!");
-                                            socket.emit("command",{list:["tagsom", d.id+" "+tagg]});
-                                        }
-                                    },
-                                }
-                            }
-
-                            },
-                        };
-                        } else if(authlevel == 1){
-                                return {
-                            items: {
-                                cancel: {
-                                    name: "Cancel",
-                                    callback: function () {
-                                        d.cancel();
-                                    },
-                                },
-                                //mute: {
-                                  //  name: function () {
-                                    //    return d.mute ? "Unmute" : "Mute";
-                                    //},
-                                    //callback: function () {
-                                      //  d.cancel(), (d.mute = !d.mute);
-                                    //},
-                                //},
-                               hail: {
- name: "Heil",
-callback: function () {
-     socket.emit("command", { list: ["hail", d.userPublic.name] });
-         },
-    },
-  dm:{
-    name: "Private Message",
-    callback: function(){
-      $("#dmto").html("Message "+d.userPublic.name);
-      $("#dmguid").val(d.id);
-      $("#dm").show();
-    },
-  },
-  quote:{
-    name: "Quote/Reply",
-    callback: function(){
-      $("#replyto").html("Reply to "+d.userPublic.name);
-      $("#guid").val(d.id);
-      $("#quote").show();
-    },
-  },
-insult:{
-    name:"Insult",
-    items:{
-    asshole: {
- name: "Call an Asshole",
-callback: function () {
-     socket.emit("command", { list: ["asshole", d.userPublic.name] });
-         },
-    },
-
-                                owo: {  
-                                    name: "Notice Bulge",
-     callback: function () {
-                                        socket.emit("command", { list: ["owo", d.userPublic.name] });
-                                    },
-                                },
-pastule:{
-name:"Pastule",
-callback:function(){
-socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
-},
-},
-                                nigger:{
-                                    name:"Tell to shut up",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
-                                        setTimeout(()=>{
-
-                                        socket.emit("talk",{"SHUUUUUUUUUUUUUUUUUUUUUUUT UUUUUUUUUUUUUUUUUUP"})
-                                        },2000)
-                                    }
-                                },
-                                kys:{
-                                    name:"Call a kiddie",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+"! your a fucking kiddie!"})
-                                    }
-                                },
-
-    }
-},
-
-                            mod:{
-                                name: "Gamer Mod CMDs",
-                                items:{
-                                    jew:{
-                                        name:"Jewify",
-                                        callback:function(){
-                                            socket.emit("command",{list:["jewify", d.id]});
-                                        }
-                                    }, 
-                                    statcustom:{
-                                        name:"User Edit",
-                                        callback:function(){
-                                            var uname = prompt("Name");
-                                            var ucolor = prompt("Color");
-                                            socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
-                                        }
-                                    },
-                                    slock:{
-                                        name:"Toggle StatLock",
-                                        callback:function(){
-                                            socket.emit("command",{list:["statlock", d.id]});
-                                        }
-                                    },
-                                    fullmute:{
-                                        name:"Server Mute/Unmute",
-                                        callback:function(){
-                                            socket.emit("command",{list:["smute", d.id]});
-                                        }
-                                    },
-                                    deporn:{
-                                        name:"Blacklist Crosscolor",
-                                        callback:function(){
-                                            socket.emit("command",{list:["deporn", d.id]});
-                                        }
-                                    },
-                                    bless:{
-                                        name:"Bless",
-                                        callback:function(){
-                                            socket.emit("command",{list:["bless", d.id]});
-                                        }
-                                    },
-                                   /* rabbi:{
-                                        name:"Make Rabbi",
-                                        callback:function(){
-                                            socket.emit("command",{list:["rabbi", d.id]});
-                                        }
-                                    },*/
-                                    niggle:{
-                                        name:"Nuke",
-                                        callback:function(){
-                                            socket.emit("command",{list:["floyd", d.id]});
-                                        }
-                                    },
-                                }
-                            }
-
-                            },
-                        };
-                        }
-                        else{
                         return {
                             items: {
                                 cancel: {
@@ -771,87 +276,28 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                         d.cancel();
                                     },
                                 },
-                                //mute: {
-                                  //  name: function () {
-                                    //    return d.mute ? "Unmute" : "Mute";
-                                    //},
-                                    //callback: function () {
-                                      //  d.cancel(), (d.mute = !d.mute);
-                                    //},
-                                //},
-                               hail: {
- name: "Heil",
-callback: function () {
-     socket.emit("command", { list: ["hail", d.userPublic.name] });
-         },
-    },
-  dm:{
-    name: "Private Message",
-    callback: function(){
-      $("#dmto").html("Message "+d.userPublic.name);
-      $("#dmguid").val(d.id);
-      $("#dm").show();
-    },
-  },
-  quote:{
-    name: "Quote/Reply",
-    callback: function(){
-      $("#replyto").html("Reply to "+d.userPublic.name);
-      $("#guid").val(d.id);
-      $("#quote").show();
-    },
-  },
-                                heyname:{
-                                    name:"Hey, NAME!",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+"!"})
-                                    }
+                                mute: {
+                                    name: function () {
+                                        return d.mute ? "Unmute" : "Mute";
+                                    },
+                                    callback: function () {
+                                        d.cancel(), (d.mute = !d.mute);
+                                    },
                                 },
-insult:{
-    name:"Insult",
-    items:{
-    asshole: {
- name: "Call an Asshole",
-callback: function () {
-     socket.emit("command", { list: ["asshole", d.userPublic.name] });
-         },
-    },
-
-                                owo: {  
+                                asshole: {
+                                    name: "Call an Asshole",
+                                    callback: function () {
+                                        socket.emit("command", { list: ["asshole", d.userPublic.name] });
+                                    },
+                                },
+                                owo: {
                                     name: "Notice Bulge",
-     callback: function () {
+                                    callback: function () {
                                         socket.emit("command", { list: ["owo", d.userPublic.name] });
                                     },
                                 },
-pastule:{
-name:"Pastule",
-callback:function(){
-socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
-},
-},
-                                nigger:{
-                                    name:"Niggerify",
-                                    callback:function(){
-                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
-                                        setTimeout(()=>{
-
-                                        socket.emit("command",{list:["nigger",""]})
-                                        },2000)
-                                    }
-                                },
-                                kys:{
-                                    name:"Ask to KYS",
-                                    callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
-                                    }
-                                },
-
-    }
-},
-
                             },
                         };
-                    }
                     },
                     animation: { duration: 175, show: "fadeIn", hide: "fadeOut" },
                 }),
@@ -980,31 +426,6 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                 {
                     key: "update",
                     value: function () {
-                        //OK solution as long as no real color starts with "http"
-                        if(this.color.startsWith("http")){
-                            //Set canvas bg to the crosscolor as easel.js itself cant handle cors
-                            this.$canvas.css("background-image", 'url("'+this.color+'")');
-                            this.$canvas.css("background-position-x", -Math.floor(this.sprite.currentFrame % 17) * this.data.size.x+'px');
-                            this.$canvas.css("background-position-y", -Math.floor(this.sprite.currentFrame / 17) * this.data.size.y+'px');
-                        } else this.$canvas.css("background-image", 'none');
-
-                        //For tagged people
-                        if(this.userPublic.tagged){
-                            //Add one if it doesnt exist
-                            if(this.offtag == undefined){
-                                $("#bonzi_"+this.id).append("<div id='tag_"+this.id+"' class='official_tag'><b><i>"+this.userPublic.tag+"</i></b></div>")
-                                this.offtag = $("#tag_"+this.id);
-                            }
-                            //Update if it exists
-                            else {
-                                this.offtag.html("<b><i>"+this.userPublic.tag+"</i></b>")
-                            }
-                        }
-                        //Remove if they're not tagged but still have a tag
-                        else if(this.offtag != undefined){
-                            this.offtag.remove();
-                            this.offtag = undefined;
-                        }
                         if (this.run) {
                             if (
                                 (0 !== this.eventQueue.length && this.eventQueue[0].index >= this.eventQueue[0].list.length && this.eventQueue.splice(0, 1), (this.event = this.eventQueue[0]), 0 !== this.eventQueue.length && this.eventRun)
@@ -1030,30 +451,11 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                     key: "talk",
                     value: function (a, b, c) {
                         var d = this;
-                      var toscroll = document.getElementById("logcontent").scrollHeight - document.getElementById("logcontent").scrollTop < 605;
                         (c = c || !1),
                             (a = replaceAll(a, "{NAME}", this.userPublic.name)),
                             (a = replaceAll(a, "{COLOR}", this.color)),
                             "undefined" != typeof b ? ((b = replaceAll(b, "{NAME}", this.userPublic.name)), (b = replaceAll(b, "{COLOR}", this.color))) : (b = a.replace("&gt;", "")),
-
-//document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userPublic.color+"'>"+this.userPublic.name+": </font>"+a+"</p>";
-document.getElementById("logcontent").insertAdjacentHTML("beforeend", "<p><font color='"+this.userPublic.color+"'>"+this.userPublic.name+": </font>"+a+"</p>");
-if(toscroll) document.getElementById("logcontent").scrollTop = document.getElementById("logcontent").scrollHeight;
-
-                          (b = replaceAll(b, "&apos;", "")),
-                          (b = replaceAll(b, "&quot;", " quote ")),
-                          (b = replaceAll(b, "&amp;", " and ")),
-                          (b = replaceAll(b, "&#91;",""));
-
-                      if(!a.startsWith("<img class='userimage'") && !a.startsWith("<video class='uservideo'")) a = linkify(a);
-
-                        else b = "-e";
-
-                       ignorehtml.forEach((toignore)=>{
-                         b = replaceAll(b, "<"+toignore+">", "") 
-                           b = replaceAll(b, "</"+toignore+">", "") });
-
-
+                            (a = linkify(a));
                         var e = "&gt;" == a.substring(0, 4) || ">" == a[0];
                         this.$dialogCont[c ? "html" : "text"](a)[e ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block"),
                             this.stopSpeaking(),
@@ -1097,7 +499,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 {
                     key: "updateName",
                     value: function () {
-                        this.$nametag.text(this.userPublic.name+this.userPublic.typing);
+                        this.$nametag.text(this.userPublic.name);
                     },
                 },
                 {
@@ -1114,15 +516,6 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                                     b +
                                     ">\n\t\t\t\t"
                             ),
-                                this.$dialog.show();
-                        }
-                    },
-                },
-                {
-                    key: "Archive",
-                    value: function (a) {
-                        if (!this.mute) {
-                            this.$dialogCont.html('<iframe src="https://archive.org/embed/' + a + ' width="640" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>'),
                                 this.$dialog.show();
                         }
                     },
@@ -1173,15 +566,9 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                     value: function (a) {
                         var b = BonziHandler.stage;
                         this.cancel(),
-                            b.removeChild(this.sprite);
-                            if(this.color.startsWith("http")){
-                                var d = { images: [this.color], frames: BonziData.sprite.frames, animations: BonziData.sprite.animations }
-                                var shjeet =  new createjs.SpriteSheet(d);
-                            this.colorPrev != this.color && (delete this.sprite, (this.sprite = new createjs.Sprite(shjeet, a ? "gone" : "idle")));
-                            }else{
-                            this.colorPrev != this.color && (delete this.sprite, (this.sprite = new createjs.Sprite(BonziHandler.spriteSheets[this.color], a ? "gone" : "idle")));
-                            }
-                            b.addChild(this.sprite);
+                            b.removeChild(this.sprite),
+                            this.colorPrev != this.color && (delete this.sprite, (this.sprite = new createjs.Sprite(BonziHandler.spriteSheets[this.color], a ? "gone" : "idle"))),
+                            b.addChild(this.sprite),
                             this.move();
                     },
                 },
@@ -1247,15 +634,6 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 grin_fwd: [182, 189, "grin_still", 1],
                 grin_still: 184,
                 grin_back: { frames: range(184, 182), next: "idle", speed: 1 },
-                bow_fwd:[224,232,"bow_still",1],
-                bow_back:{frames:[232,231,230,229,228,227,226,225,224],next:"idle",speed:1},
-                bow_still:232,
-                think_fwd:[242,247,"think_still",1],
-                think_back:{frames:[247,246,245,244,243,242],next:"idle",speed:1},
-                think_still:247,
-                smile_fwd:[181,186,"smile_still",1],
-                smile_back:{frames:[186,185,184,183,182,181],next:"idle",speed:1},
-                smile_still:186,
                 backflip: [331, 343, "idle", 1],
             },
         },
@@ -1291,12 +669,6 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             praise_still: "praise_back",
             grin_fwd: "grin_back",
             grin_still: "grin_back",
-            bow_fwd: "bow_back",
-            bow_still: "bow_back",
-            think_fwd: "think_back",
-            think_still: "think_back",
-            smile_fwd: "smile_back",
-            smile_still: "smile_back",
             backflip: "idle",
             idle: "idle",
         },
@@ -1470,14 +842,14 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
     text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called “Linux” distributions are really distributions of BONZI/Linux."
 }]
 
-
+    
     $(document).ready(function () {
         window.BonziHandler = new (function () {
             return (
                 (this.framerate = 1 / 15),
                 (this.spriteSheets = {}),
                 (this.prepSprites = function () {
-                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","jabba","seamus","jew","inverted","dress","orange","floyd","blessed" ,"ronnie","allah","white","yellow","troll","rabbi"], b = 0; b < a.length; b++) {
+                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope"], b = 0; b < a.length; b++) {
                         var c = a[b],
                             d = { images: ["./img/bonzi/" + c + ".png"], frames: BonziData.sprite.frames, animations: BonziData.sprite.animations };
                         this.spriteSheets[c] = new createjs.SpriteSheet(d);
@@ -1558,14 +930,9 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
     Object.defineProperty(Array.prototype, "equals", { enumerable: !1 });
 var loadQueue = new createjs.LoadQueue(),
     loadDone = [],
-    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziJew","bonziOrange","bonziSeamus","bonziDress","bonziJabba","bonziInverted","bonziFloyd","bonziRonnie","bonziBlessed","bonziAllah","bonziWhite","bonziYellow","bonziTroll","bonziRabbi","topjej"];
+    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "topjej"];
 $(window).load(function () {
     $("#login_card").show(), $("#login_load").hide(), loadBonzis();
-    $("#login_name").val(cookieobject.namee);
-    if(cookieobject.background !== undefined) {
-        if(cookieobject.background == "main") $("#bghold").html("");
-        else $("#bghold").html("<img style='top:0;left:0;position:fixed;width:100%;height:100%;z-index:-10;' src='"+cookieobject.background+"'>");
-    }
 });
 var undefined,
     hostname = window.location.hostname,
@@ -1573,10 +940,6 @@ var undefined,
     usersPublic = {},
     bonzis = {},
     debug = !0;
-    socket.on("authlv", function (a){
-        authlevel = a.level;
-        console.log(a.level)
-    }),
 $(function () {
     $("#login_go").click(loadTest),
         $("#login_room").val(window.location.hash.slice(1)),
@@ -1598,25 +961,20 @@ $(function () {
                     .text("Error: " + b[a.reason] + " (" + a.reason + ")");
         }),
 socket.on("errr", error=>{
+if(error.code == 105){
 err = true;
-$("#page_error"+error.code).show()
+document.getElementById("limitip").innerHTML = error.limit;
+$("#page_error105").show()
+}
 }),
 socket.on("stats", stat=>{
 document.getElementById("climit").innerHTML = "Alt Limit: "+stat.climit;
 }),
-        socket.on("motd", mcontents=>{
-            if(cookieobject.motd != mcontents.id && mcontents.id != 0){
-                console.log(mcontents.id);
-                console.log(cookieobject.motd);
-                cookieobject.motd = mcontents.id;
-                compilecookie();
-                $("#motdcontent").html(mcontents.content);
-                $("#motd").show();
-            }
-        }),
-
         socket.on("disconnect", function (a) {
-            if(err == false)errorFatal();
+
+if(err == false){
+            errorFatal();
+}
         });
 
 });

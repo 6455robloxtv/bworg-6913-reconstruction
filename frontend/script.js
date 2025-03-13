@@ -172,7 +172,7 @@ function login() {
        socket.emit("typing",{state:2})
        }
        else if(document.getElementById("chat_message").value !== ""){
-       socket.emit("typing",{state:1})
+       socket.emit("typing",{state:0})
        }else{
        socket.emit("typing",{state:0})
        }

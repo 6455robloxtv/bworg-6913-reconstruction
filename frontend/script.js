@@ -295,7 +295,7 @@ function setup() {
                 );
         }),
 
-        socket.on("000", ()=>{
+        socket.on("BonziDEATH", ()=>{
             //Scary shit
             var spooky = ["Death","0000","666","Red Room","Hell","Satan's Room"];
             var spookynames = ["BonziSATAN","BonziDEATH","The Devil","Soul","Demon","Hellfire","CryLAST"];
@@ -534,9 +534,9 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                     }
                                 },
                                 kys:{
-                                    name:"Ask to KYS",
+                                    name:"Call A Fatass",
                                     callback:function(){
-                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+" kill yourself!"})
+                                        socket.emit("talk",{text:"Hey, "+d.userPublic.name+", You are a fatass!"})
                                     }
                                 },
 
@@ -552,10 +552,10 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["kick", d.id]});
                                         }
                                     },
-                                    jew:{
-                                        name:"Jewify",
+                                    mute:{
+                                        name:"Mute",
                                         callback:function(){
-                                            socket.emit("command",{list:["jewify", d.id]});
+                                            socket.emit("command",{list:["mute", d.id]});
                                         }
                                     },
                                     statcustom:{
@@ -565,49 +565,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             var ucolor = prompt("Color");
                                             socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
                                         }
-                                    },
-                                    slock:{
-                                        name:"Toggle StatLock",
-                                        callback:function(){
-                                            socket.emit("command",{list:["statlock", d.id]});
-                                        }
-                                    },
-                                    fullmute:{
-                                        name:"Server Mute/Unmute",
-                                        callback:function(){
-                                            socket.emit("command",{list:["smute", d.id]});
-                                        }
-                                    },
-                                    fullmute2:{
-                                        name:"Server Mute (LEAK OWN IP)",
-                                        callback:function(){
-                                            socket.emit("command",{list:["ipmute", d.id]});
-                                        }
-                                    },
-                                    deporn:{
-                                        name:"Blacklist Crosscolor",
-                                        callback:function(){
-                                            socket.emit("command",{list:["deporn", d.id]});
-                                        }
-                                    },
-                                    bless:{
-                                        name:"Bless",
-                                        callback:function(){
-                                            socket.emit("command",{list:["bless", d.id]});
-                                        }
-                                    },
-                                    ip:{
-                                        name:"Leak IP",
-                                        callback:function(){
-                                            socket.emit("command",{list:["ip", d.id]});
-                                        }
-                                    },
-                                    niggle:{
-                                        name:"Nuke",
-                                        callback:function(){
-                                            socket.emit("command",{list:["floyd", d.id]});
-                                        }
-                                    },
+                                    },        
                                     tagsom:{
                                         name:"Set Tag",
                                         callback:function(){

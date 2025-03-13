@@ -1266,14 +1266,14 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "But I'll do it anyway. Because you want me to. I hope you're happy." },
             ],
             [
-                { type: "text", text: "Prepare for something Seamus never heard of" },
+                { type: "text", text: "Prepare for something liquid fune never heard of" },
                 { type: "anim", anim: "praise_fwd", ticks: 15 },
                 { type: "text", text: "HUMOUR!" },
                 { type: "anim", anim: "praise_back", ticks: 15 },
             ],
             [{ type: "text", text: "{NAME} used /joke. Whoop-dee-fucking doo." }],
-            [{ type: "text", text: "{NAME} asked me for jewish comedy." }],
-            [{ type: "text", text: "Prepare to be offended faggots." }],
+            [{ type: "text", text: "{NAME} asked me for some comedy." }],
+            [{ type: "text", text: "Prepare to be full of laughter." }],
             [{ type: "text", text: "HEY YOU IDIOTS ITS TIME FOR A JOKE" }],
             [
                 { type: "text", text: "Wanna hear a joke?" },
@@ -1281,13 +1281,13 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "Mute me then. That's your fucking problem." },
             ],
             [
-                { type: "text", text: "Hey niggers prepare for a joke." },
+                { type: "text", text: "ITS TIME FOR THE JOKE" },
             ],
             [
-                { type: "text", text: "Time to make fun of black people." },
+                { type: "text", text: "Time to tell a joke! yay! yes." },
             ],
             [
-                { type: "text", text: "Kill yourself like a trans person, {NAME}." },
+                { type: "text", text: "Applaud for yourself for doing /joke,  {NAME}." },
             ],
             [{ type: "text", text: "Senpai {NAME} wants me to tell a joke." }],
             [{ type: "text", text: "Time for whatever horrible fucking jokes the creator of this site wrote." }],
@@ -1295,7 +1295,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
         event_list_joke_mid: [
             [
                 { type: "text", text: "What is easy to get into, but hard to get out of?" },
-                { type: "text", text: "Child support!" },
+                { type: "text", text: "Uhh... I dont know!" },
             ],
             [
                 { type: "text", text: "Why do they call HTML HyperText?" },
@@ -1310,18 +1310,18 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                     say: "Two sausages are in a pan. One looks at the other and says, Boy it's hot in here! and the other sausage says, Unbelievable! It's a talking sausage!",
                 },
                 { type: "anim", anim: "shrug_back", ticks: 15 },
-                { type: "text", text: "What were you expecting? A dick joke? You're a sick fuck." },
+                { type: "text", text: "What were you expecting? A Disgusting joke? You're a sick fuck." },
             ],
             [
                 { type: "text", text: "What is in the middle of Paris?" },
                 { type: "text", text: "A giant inflatable buttplug." },
             ],
             [
-                { type: "text", text: "Why can't Asian people drive?" },
-                { type: "text", text: "Because I don't like them. That's the whole joke." },
+                { type: "text", text: "Why does warsaw make fun of me," },
+                { type: "text", text: "BECAUSE THEY ARE RACIST TARDS!" },
             ],
             [
-                { type: "text", text: "The twin towers deserved to be attacked by dirty arabs." },
+                { type: "text", text: "Ding dong! Whos there? IMA FIRE MY LAZOR! RAAAAAAAAAAAAAAAAAAAH!" },
             ],
             [
                 { type: "text", text: "What goes in pink and comes out blue?" },
@@ -1329,7 +1329,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             ],
             [
                 { type: "text", text: "What type of water won't freeze?" },
-                { type: "text", text: "Your mother's." },
+                { type: "text", text: "Well fuck, i cant think of anything else!" },
             ],
             [
                 { type: "text", text: "Who earns a living by driving his customers away?" },
@@ -1348,51 +1348,51 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             ],
             [
                 { type: "text", text: "Why was six afraid of seven?" },
-                { type: "text", text: "Because seven was a sex offender" },
+                { type: "text", text: "Because seven ate nine and got called a vorefag" },
             ],
             [
                 { type: "text", text: "What did the digital clock say to the grandfather clock?" },
                 { type: "text", text: "Suck my clock." },
             ],
             [
-                { type: "text", text: "What do you call a man who shaves 10 times a day?" },
-                { type: "text", text: "A woman." },
+                { type: "text", text: "What do you say when a rooster makes a noise," },
+                { type: "text", text: "BLARARAARGHARHGAHGHRAHGRAGHARGHA SHUT THE FUCK UP OR YOU DIE YOU FATASS!" },
             ],
             [
                 { type: "text", text: "How do you get water in watermelons?" },
-                { type: "text", text: "Cum in them." },
+                { type: "text", text: "No... Not this time...." },
             ],
             [
                 { type: "text", text: "Why do we call money bread?" },
                 { type: "text", text: "Because we KNEAD it. Haha please send money to my PayPal at nigerianprince99@bonzi.com" },
             ],
             [
-                { type: "text", text: "How many arabs does it take to knock down a lightbulb?" },
-                { type: "text", text: "I don't know but just a few can knock down 2 towers." },
+                { type: "text", text: "Knock knock, whos there, dr, dr who," },
+                { type: "text", text: "DR TRAYUOLPIS BRAAHAHHGHGAHGHA!" },
             ],
             [
-                { type: "text", text: "What do you call an autistic child with herpes?" },
-                { type: "text", text: "Seamus Kendrick Cremeens from Sullivan, Ohio." },
+                { type: "text", text: "What do you call the worst owner from a british house?" },
+                { type: "text", text: "Luquid fune!" },
             ],
             [
                 { type: "text", text: "Here's a joke:" },
-                { type: "text", text: "Women's rights" },
+                { type: "text", text: "BEHH BEHH BEH SOI SOI SOIIIIIIIIIIIIIIIIIIIIIIIII" },
             ],
             [
-                { type: "text", text: "Why did Seamus' brother kill himself?" },
-                { type: "text", text: "He's trans (NOT she. Trannies aren't valid.)" },
+                { type: "text", text: "What do you call fune?" },
+                { type: "text", text: "A Fat Chicken!" },
             ],
             [
-                { type: "text", text: "I like KFC, I have no water and I have huge lips. Who am I?" },
-                { type: "text", text: "A fat black nigger." },
+                { type: "text", text: "You know what, so far i am not dealing with this racist bullshit and i am going to mute racist tards" },
+                { type: "text", text: "Thanks for telling this sick fucking joke" },
             ],
             [
-                { type: "text", text: "How many Germans does it take to change a lightbulb?" },
-                { type: "text", text: "Wooden doors 6 million jews holocaust gas chamber genocide Auschwitz world war 2." },
+                { type: "text", text: "Whats funnier then 24?" },
+                { type: "text", text: "25!" },
             ],
             [
                 { type: "text", text: "Why did the chicken cross the road?" },
-                { type: "text", text: "I don't know but jews are probably to blame." },
+                { type: "text", text: "To- wait, OH SHIT! CAR CRAAAAAAS- SCHSCHSHCSHCSCHHCCSHCHSHCHSHCSHCSHCHSCSHCSHCHSCHSCHSHCSHCBLPBLPBLPLSPBPSLBSPBPSBLSPBLSPBLPSLBPSLBPSLBPSLBSLBPSLBPSLBPSLPBSCPLKPSCPLPK" },
             ],
             [
                 { type: "text", text: "What is a cow that eats grass?" },
@@ -1400,8 +1400,8 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 { type: "text", text: "I'm a comedic genius, I know." },
             ],
             [
-                { type: "text", text: "How do you get a girlfriend?" },
-                { type: "text", text: "You rape one" },
+                { type: "text", text: "Where does Funes Bonziworld go?" },
+                { type: "text", text: "in the bin!" },
                 { type: "text", text: "I'm a comedic genius, I know." },
             ],
         ],
@@ -1418,16 +1418,16 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             [{ type: "text", text: "Maybe I'll keep my day job, {NAME}. Patreon didn't accept me." }],
             [
                 { type: "text", text: "Laughter is the best medicine!" },
-                { type: "text", text: "Apart from meth." },
+                { type: "text", text: "Apart from acid." },
             ],
             [
                 { type: "text", text: "Now laugh." },
             ],
             [
-                { type: "text", text: "Tell that one to your mother." },
+                { type: "text", text: "Tell that one to the racist fags to make them angry." },
             ],
             [
-                { type: "text", text: "God i hate minorities so much." },
+                { type: "text", text: "God i hate fune so much" },
             ],
             [
                 { type: "text", text: "Don't judge me on my sense of humor alone." },
@@ -1444,43 +1444,43 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Women are objects." },
+                { type: "text", text: "Did you know the angel of north started getting built in 1994?" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "The jews run the banks. If you want to be hired, become a jew." },
+                { type: "text", text: "Did you know bonsai are a miniature tree artform, originated in China as pun sai?" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "All muslims are terrorists." },
+                { type: "text", text: "Fune is a bad user, he supports terrorists!" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Seamus fingers little boys." },
+                { type: "text", text: "Bonziworld e edition is a better server then funes!" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Gay faggots have no rights. Pride month isn't real." },
+                { type: "text", text: "Bonziworld." },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "Niggers are bad." },
+                { type: "text", text: "Did you know theres many cults on the internet?" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],
             [
                 { type: "anim", anim: "earth_fwd", ticks: 15 },
-                { type: "text", text: "The jews did everything that's bad." },
+                { type: "text", text: "Warsaw is the worst community ever of the bonziworld timeline!" },
                 { type: "anim", anim: "earth_back", ticks: 15 },
                 { type: "anim", anim: "grin_fwd", ticks: 15 },
             ],

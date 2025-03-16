@@ -133,7 +133,12 @@ input[type="text"] {
   user-select: none; }
 
 .bonzi > canvas, .bonzi_placeholder {
-  position: absolute; }
+  position: absolute;
+  cursor: pointer;
+}
+.bonzi > canvas:hover, .bonzi_placeholder:hover {
+  cursor: grab;
+}
 
 .bubble-content {
   padding: 12px;

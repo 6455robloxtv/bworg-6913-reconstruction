@@ -370,7 +370,7 @@ body.vaporwave #chat_send {
 #login_readme {
   color: #444;
   padding: 12px;
-  bottom: 15%;
+  bottom: 20%;
   width: auto;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
@@ -428,7 +428,6 @@ body.vaporwave #chat_send {
   bottom: 16px;
   font-size: 16px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
-  
 
 @media screen and (max-height: 550px) {
   #page_login {
@@ -488,7 +487,7 @@ body.vaporwave #chat_send {
   box-sizing: border-box;
   overflow: auto; }
 
-#page_error, #page_ban, #page_unsupp, #page_error105, #page_error106, #page_error104 {
+#page_error, #page_ban, #page_unsupp {
   background-color: rgba(0, 0, 0, 0.5); }
 
 /*!
@@ -551,7 +550,7 @@ body.vaporwave #chat_send {
   user-select: text; }
 
 .context-menu-item.context-menu-hover {
-  background-color: #316ac5;
+  background-color: #8001fe;
   color: #FFF;
   cursor: pointer; }
 

@@ -1,6 +1,17 @@
 "use strict";
 var passcode = "";
 var err = false;
+var ignorehtml = ["b","i","u","s","font size=5","div","div class='quote'"];
+function quote(){
+  socket.emit("quote",{msg:$("#replyvalue").val(), guid: $("#guid").val()})
+  $("#quote").hide();
+  $("#replyvalue").val("");
+}
+function dm(){
+  socket.emit("dm", {msg:$("#dmvalue").val(), guid: $("#dmguid").val()})
+  $("#dm").hide();
+  $("#dmvalue").val("");
+}
 function updateAds() {
     var a = $(window).height() - $(adElement).height(),
         b = a <= 250;
@@ -27,6 +38,7 @@ function youtubeParser(a) {
         c = a.match(b);
     return !(!c || 11 != c[7].length) && c[7];
 }
+
 function rtimeOut(a, b) {
     var c,
         d = Date.now,
@@ -74,6 +86,14 @@ function loadBonzis(a) {
         { id: "bonziPurple", src: "./img/bonzi/purple.png" },
         { id: "bonziRed", src: "./img/bonzi/red.png" },
         { id: "bonziPink", src: "./img/bonzi/pink.png" },
+        { id: "bonziSeamus", src: "./img/bonzi/seamus.png" },
+        { id: "bonziPetey", src: "./img/bonzi/petey.png" },
+        { id: "bonziRPC", src: "./img/bonzi/rpc.png" },
+        { id: "bonziDogman", src: "./img/bonzi/dogman.png" },
+        { id: "bonziGhost", src: "./img/bonzi/ghost.png" },
+        { id: "bonziOrange", src: "./img/bonzi/orange.png" },
+        { id: "bonziProgram", src: "./img/bonzi/program.png" },
+        { id: "bonziNoob", src: "./img/bonzi/noob.png" },
         { id: "topjej", src: "./img/misc/topjej.png" },
     ]),
         loadQueue.on(
@@ -97,7 +117,18 @@ function loadTest() {
         }, 100));
 }
 function login() {
-   socket.emit("login", {passcode:passcode, name: $("#login_name").val(), room: $("#login_room").val() }), setup();
+   socket.emit("login", {passcode:passcode, name: $("#login_name").val(), room: $("#login_room").val() });
+   document.addEventListener("keyup",key=>{
+       if(document.getElementById("chat_message").value.startsWith("/")){
+       socket.emit("typing",{state:2})
+       }
+       else if(document.getElementById("chat_message").value !== ""){
+       socket.emit("typing",{state:1})
+       }else{
+       socket.emit("typing",{state:0})
+       }
+   })
+     setup();
 }
 function errorFatal() {
     ("none" != $("#page_ban").css("display") && "none" != $("#page_kick").css("display")) || $("#page_error").show();
@@ -112,6 +143,7 @@ function setup() {
         }),
         socket.on("updateAll", function (a) {
             $("#page_login").hide(), (usersPublic = a.usersPublic), usersUpdate(), BonziHandler.bonzisCheck();
+          $("#log").show();
         }),
         socket.on("update", function (a) {
             (window.usersPublic[a.guid] = a.userPublic), usersUpdate(), BonziHandler.bonzisCheck();
@@ -127,6 +159,10 @@ function setup() {
         socket.on("youtube", function (a) {
             var b = bonzis[a.guid];
             b.cancel(), b.youtube(a.vid);
+        }),
+        socket.on("hail", function (a) {
+            var b = bonzis[a.guid];
+            b.runSingleEvent([{type:"anim",anim:"bow_fwd",ticks:20},{type:"text",text:"HEIL "+a.user},{type:"idle"}])
         }),
         socket.on("fact", function (a) {
             var b = bonzis[a.guid];
@@ -271,11 +307,42 @@ var _createClass = (function () {
                         return {
                             items: {
                                 cancel: {
-                                    name: "Cancel",
+                                    name: "Close",
                                     callback: function () {
                                         d.cancel();
                                     },
                                 },
+                                //mute: {
+                                  //  name: function () {
+                                    //    return d.mute ? "Unmute" : "Mute";
+                                    //},
+                                    //callback: function () {
+                                      //  d.cancel(), (d.mute = !d.mute);
+                                    //},
+                                //},
+                               hail: {
+ name: "Hail",
+callback: function () {
+     socket.emit("command", { list: ["hail", d.userPublic.name] });
+         },
+    },
+  dm:{
+    name: "Private Message",
+    callback: function(){
+      $("#dmto").html("Message "+d.userPublic.name);
+      $("#dmguid").val(d.id);
+      $("#dm").show();
+    },
+  },
+  quote:{
+    name: "Quote",
+    callback: function(){
+      $("#replyto").html("Reply to "+d.userPublic.name);
+      $("#guid").val(d.id);
+      $("#quote").show();
+    },
+  },
+
                                 mute: {
                                     name: function () {
                                         return d.mute ? "Unmute" : "Mute";
@@ -284,18 +351,50 @@ var _createClass = (function () {
                                         d.cancel(), (d.mute = !d.mute);
                                     },
                                 },
-                                asshole: {
-                                    name: "Call an Asshole",
-                                    callback: function () {
-                                        socket.emit("command", { list: ["asshole", d.userPublic.name] });
-                                    },
-                                },
-                                owo: {
+insult:{
+    name:"Insult",
+    items:{
+    asshole: {
+ name: "Call an Asshole",
+callback: function () {
+     socket.emit("command", { list: ["asshole", d.userPublic.name] });
+         },
+    },
+
+                                owo: {  
                                     name: "Notice Bulge",
-                                    callback: function () {
+     callback: function () {
                                         socket.emit("command", { list: ["owo", d.userPublic.name] });
                                     },
                                 },
+pastule:{
+name:"Pastule",
+callback:function(){
+socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
+},
+},
+                                fune:{
+                                    name:"Funeify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+
+                                        socket.emit("command",{list:["fune",""]})
+                                        },2000)
+                                    }
+                                },
+                                unbojihfy:{
+                                    name:"Unbojihfy",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+                                        socket.emit("command",{list:["unbojihfy",""]})
+                                        },2000)
+                                    }
+                                },        
+    }
+},
+
                             },
                         };
                     },
@@ -303,6 +402,7 @@ var _createClass = (function () {
                 }),
                 (this.needsUpdate = !1),
                 this.runSingleEvent([{ type: "anim", anim: "surf_intro", ticks: 30 }]);
+            setTimeout(function () {var jump_off_sfx = new Audio("./sfx/jump_off.mp3"); jump_off_sfx.play();}, 2000);
         }
         return (
             _createClass(a, [
@@ -451,11 +551,27 @@ var _createClass = (function () {
                     key: "talk",
                     value: function (a, b, c) {
                         var d = this;
+
                         (c = c || !1),
                             (a = replaceAll(a, "{NAME}", this.userPublic.name)),
                             (a = replaceAll(a, "{COLOR}", this.color)),
                             "undefined" != typeof b ? ((b = replaceAll(b, "{NAME}", this.userPublic.name)), (b = replaceAll(b, "{COLOR}", this.color))) : (b = a.replace("&gt;", "")),
-                            (a = linkify(a));
+document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userPublic.color+"'>"+this.userPublic.name+": </font>"+a+"</p>",                      document.getElementById("logcontent").scrollTop = document.getElementById("logcontent").scrollHeight,
+
+                          (b = replaceAll(b, "&apos;", "")),
+                          (b = replaceAll(b, "&quot;", " quote ")),
+                          (b = replaceAll(b, "&amp;", " and ")),
+                          (b = replaceAll(b, "&#91;",""));
+
+                      if(!a.startsWith("<img class='userimage'")) a = linkify(a);
+
+                        else b = "-e";
+
+                       ignorehtml.forEach((toignore)=>{
+                         b = replaceAll(b, "<"+toignore+">", "") 
+                           b = replaceAll(b, "</"+toignore+">", "") });
+
+
                         var e = "&gt;" == a.substring(0, 4) || ">" == a[0];
                         this.$dialogCont[c ? "html" : "text"](a)[e ? "addClass" : "removeClass"]("bubble_greentext").css("display", "block"),
                             this.stopSpeaking(),
@@ -488,6 +604,7 @@ var _createClass = (function () {
                     key: "exit",
                     value: function (a) {
                         this.runSingleEvent([{ type: "anim", anim: "surf_away", ticks: 30 }]), setTimeout(a, 2e3);
+                        setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play();}, 10);
                     },
                 },
                 {
@@ -499,7 +616,7 @@ var _createClass = (function () {
                 {
                     key: "updateName",
                     value: function () {
-                        this.$nametag.text(this.userPublic.name);
+                        this.$nametag.text(this.userPublic.name+this.userPublic.typing);
                     },
                 },
                 {
@@ -842,14 +959,14 @@ var _createClass = (function () {
     text: "Linux is normally used in combination with the BONZI operating system: the whole system is basically BONZI with Linux added, or BONZI/Linux. All the so-called “Linux” distributions are really distributions of BONZI/Linux."
 }]
 
-    
+
     $(document).ready(function () {
         window.BonziHandler = new (function () {
             return (
                 (this.framerate = 1 / 15),
                 (this.spriteSheets = {}),
                 (this.prepSprites = function () {
-                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope"], b = 0; b < a.length; b++) {
+                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","program","seamus","noob","inverted","ghost","orange","floyd","genie","peedy","petey","dogman","rpc"], b = 0; b < a.length; b++) {
                         var c = a[b],
                             d = { images: ["./img/bonzi/" + c + ".png"], frames: BonziData.sprite.frames, animations: BonziData.sprite.animations };
                         this.spriteSheets[c] = new createjs.SpriteSheet(d);
@@ -930,7 +1047,7 @@ var _createClass = (function () {
     Object.defineProperty(Array.prototype, "equals", { enumerable: !1 });
 var loadQueue = new createjs.LoadQueue(),
     loadDone = [],
-    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "topjej"];
+    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziNoob","bonziOrange","bonziSeamus","bonziNoob","bonziProgram","bonziGhost","bonziFloyd","BonziGenie","BonziPeedy, BonziPetey","BonziDogman","BonziRPC"];
 $(window).load(function () {
     $("#login_card").show(), $("#login_load").hide(), loadBonzis();
 });
@@ -965,6 +1082,9 @@ if(error.code == 105){
 err = true;
 document.getElementById("limitip").innerHTML = error.limit;
 $("#page_error105").show()
+} else if(error.code == 104){
+err = true;
+$("#page_error104").show()
 }
 }),
 socket.on("stats", stat=>{

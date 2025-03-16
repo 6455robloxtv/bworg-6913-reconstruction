@@ -1263,5 +1263,4 @@ debugger;
                     console.clear();
                 }, 10));
 
-  socket = io("https://bonziworldeedition.onrender.com/");
-  delete io;
+

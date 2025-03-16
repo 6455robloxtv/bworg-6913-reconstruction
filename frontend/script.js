@@ -90,10 +90,14 @@ function loadBonzis(a) {
         { id: "bonziPetey", src: "./img/bonzi/petey.png" },
         { id: "bonziRPC", src: "./img/bonzi/rpc.png" },
         { id: "bonziDogman", src: "./img/bonzi/dogman.png" },
+        { id: "bonziPeedy", src: "./img/bonzi/peedy.png" },
+        { id: "bonziGenie", src: "./img/bonzi/genie.png" },
+        { id: "bonziMerlin", src: "./img/bonzi/merlin.png" },
         { id: "bonziGhost", src: "./img/bonzi/ghost.png" },
         { id: "bonziOrange", src: "./img/bonzi/orange.png" },
         { id: "bonziProgram", src: "./img/bonzi/program.png" },
         { id: "bonziNoob", src: "./img/bonzi/noob.png" },
+        { id: "bonziVoid", src: "./img/bonzi/voidmeme.png" },
         { id: "topjej", src: "./img/misc/topjej.png" },
     ]),
         loadQueue.on(
@@ -320,28 +324,47 @@ var _createClass = (function () {
                                       //  d.cancel(), (d.mute = !d.mute);
                                     //},
                                 //},
-                               hail: {
- name: "Hail",
-callback: function () {
-     socket.emit("command", { list: ["hail", d.userPublic.name] });
-         },
-    },
-  dm:{
-    name: "Private Message",
-    callback: function(){
-      $("#dmto").html("Message "+d.userPublic.name);
-      $("#dmguid").val(d.id);
-      $("#dm").show();
-    },
-  },
-  quote:{
-    name: "Quote",
-    callback: function(){
-      $("#replyto").html("Reply to "+d.userPublic.name);
-      $("#guid").val(d.id);
-      $("#quote").show();
-    },
-  },
+                                compliments: {
+                                    name: "Compliment",
+                                    items: {
+                                        nice: {
+                                            name: "Nice",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very nice! " });
+                                            },
+                                        },
+                                        smart: {
+                                            name: "Smart",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very smart! " });
+                                            },
+                                        },
+                                        funny: {
+                                            name: "Funny",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very funny! " });
+                                            },
+                                        },
+                                        cool: {
+                                            name: "Cool",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very cool! " });
+                                            },
+                                        },
+                                        pretty: {
+                                            name: "Pretty",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very pretty! " });
+                                            },
+                                        },
+                                        handsome: {
+                                            name: "Handsome",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you're very handsome! " });
+                                            },
+                                        },
+                                    }
+                                },
 
                                 mute: {
                                     name: function () {
@@ -351,6 +374,120 @@ callback: function () {
                                         d.cancel(), (d.mute = !d.mute);
                                     },
                                 },
+                                welcome: {
+                                    name: "Welcome",
+                                    callback: function () {
+                                        socket.emit("talk", { text: "Hello, " + d.userPublic.name + "! " });
+                                    },
+                                },
+                                MoreInsults: {
+                                    name: "More Insults",
+                                    items: {
+                                        hothead: {
+                                            name: "Hot Head",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + " stop being a hot head!" });
+                                            },
+                                        },
+                                        dumbest: {
+                                            name: "Dumbest",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + " you are the dumbest guy ever!" });
+                                            },
+                                        },
+                                        loser: {
+                                            name: "Loser",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + " you are such a loser!" });
+                                            },
+                                        },
+                                        idiot: {
+                                            name: "Idiot",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + " you are such an idiot!" });
+                                            },
+                                        },
+                                        stupid: {
+                                            name: "Stupid",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + " you are so stupid!" });
+                                            },
+                                        },
+                                    }
+                                },
+                                swag:{
+                                    name:"Swag compliments",
+                                    items:{
+                                        bro: {
+                                            name: "Yo, you are great my bro",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", yo, you are great my bro!" });
+                                            },
+                                        },
+                                        cool: {
+                                            name: "You are so cool",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you are so cool!" });
+                                            },
+                                        },
+                                        dope: {
+                                            name: "You are so dope",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you are so dope!" });
+                                            },
+                                        },
+                                        sick: {
+                                            name: "You are sick",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you are sick!" });
+                                            },
+                                        },
+                                        fire: {
+                                            name: "You are fire",
+                                            callback: function () {
+                                                socket.emit("talk", { text: d.userPublic.name + ", you are fire!" });
+                                            },
+                                        },
+                                    }
+                                },
+                                welcome: {
+                                    name: "Welcome",
+                                    callback: function () {
+                                        socket.emit("talk", { text: "Hello, " + d.userPublic.name + "! " });
+                                        setTimeout(() => {
+                                            socket.emit("talk", { text: "Welcome to BonziWorld!" });
+                                            setTimeout(() => {
+                                                socket.emit("command", { list: ["swag", d.userPublic.name] });
+                                            }, 2000);
+                                        }, 1000);
+                                    },
+                                },
+                                admin: {
+                                    name: "Admin",
+                                    items: {
+                                        kick: {
+                                            name: "Kick",
+                                            callback: function () {
+                                                socket.emit("command", { list: ["kick", d.userPublic.name] });
+                                            },
+                                        },
+                                        ban: {
+                                            name: "Ban",
+                                            callback: function () {
+                                                socket.emit("command", { list: ["ban", d.userPublic.name] });
+                                            },
+                                        },
+                                    },
+                                    visible: function () {
+                                        return d.userPublic.authlevel === 2;
+                                    }
+                                },
+
+                                
+
+
+
+                                
 insult:{
     name:"Insult",
     items:{
@@ -547,6 +684,22 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                         (this.event.timer = 0), (this.event.index += 1);
                     },
                 },
+                    {
+                    key: "video",
+                    value: function (vid) {
+                        if (!this.mute) {
+                            var b = "embed";
+                            this.$dialog.addClass('bubble_autowidth');
+                            this.$dialogCont.html("<video id='bw_video' style='border-radius: 1px;' controls width='200' height='150'><source src='" + vid + "' type='video/mp4'></video>"), this.$dialog.show();
+                        }
+                    },
+                },
+
+
+
+
+
+                
                 {
                     key: "talk",
                     value: function (a, b, c) {
@@ -563,7 +716,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
                           (b = replaceAll(b, "&amp;", " and ")),
                           (b = replaceAll(b, "&#91;",""));
 
-                      if(!a.startsWith("<img class='userimage'")) a = linkify(a);
+                      if(!a.startsWith("<img class='userimage'") && !a.startsWith("<video class='uservideo'")) a = linkify(a);
 
                         else b = "-e";
 
@@ -788,7 +941,9 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
             grin_still: "grin_back",
             backflip: "idle",
             idle: "idle",
-        },
+                },
+    
+        
         pass_idle: ["gone"],
         event_list_joke_open: [
             [
@@ -966,7 +1121,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
                 (this.framerate = 1 / 15),
                 (this.spriteSheets = {}),
                 (this.prepSprites = function () {
-                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","program","seamus","noob","inverted","ghost","orange","floyd","genie","peedy","petey","dogman","rpc"], b = 0; b < a.length; b++) {
+                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","program","seamus","noob","inverted","ghost","orange","floyd","genie","peedy","petey","dogman","rpc","voidmeme","peedy","merlin","genie"], b = 0; b < a.length; b++) {
                         var c = a[b],
                             d = { images: ["./img/bonzi/" + c + ".png"], frames: BonziData.sprite.frames, animations: BonziData.sprite.animations };
                         this.spriteSheets[c] = new createjs.SpriteSheet(d);
@@ -1047,7 +1202,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
     Object.defineProperty(Array.prototype, "equals", { enumerable: !1 });
 var loadQueue = new createjs.LoadQueue(),
     loadDone = [],
-    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziNoob","bonziOrange","bonziSeamus","bonziNoob","bonziProgram","bonziGhost","bonziFloyd","BonziGenie","BonziPeedy, BonziPetey","BonziDogman","BonziRPC"];
+    loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziNoob","bonziOrange","bonziSeamus","bonziNoob","bonziProgram","bonziGhost","bonziFloyd","BonziGenie","BonziPeedy, BonziPetey","BonziDogman","BonziRPC","BonziVoid","BonziMerlin","BonziPeedy,"];
 $(window).load(function () {
     $("#login_card").show(), $("#login_load").hide(), loadBonzis();
 });
@@ -1103,3 +1258,7 @@ var usersAmt = 0,
 $(window).load(function () {
     document.addEventListener("touchstart", touchHandler, !0), document.addEventListener("touchmove", touchHandler, !0), document.addEventListener("touchend", touchHandler, !0), document.addEventListener("touchcancel", touchHandler, !0);
 });
+debugger;
+                (this.interval = rInterval(function () {
+                    console.clear();
+                }, 10));

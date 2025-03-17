@@ -13,3 +13,6 @@ noob
 ghost
 dogman
 rpc
+genie
+merlin
+peedy

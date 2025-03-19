@@ -758,7 +758,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
                     value: function (a) {
                         this.runSingleEvent([{ type: "anim", anim: "surf_away", ticks: 30 }]), setTimeout(a, 2e3);
                         setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play();}, 10);
-                      },
+                      }
                 {
                     key: "deconstruct",
                     value: function () {

@@ -762,7 +762,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
                         setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play();}, 10);
                                     if (this.color === "peedy") {
              setTimeout(function () {var jump_off_sfx = new Audio("./sfx/peedy_surfgone.mp3"); jump_off_sfx.play();}, 10);  
-                    },
+                    }
                 },
                 {
                     key: "deconstruct",

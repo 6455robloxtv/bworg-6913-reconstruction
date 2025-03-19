@@ -761,7 +761,7 @@ document.getElementById("logcontent").innerHTML += "<p><font color='"+this.userP
                         this.runSingleEvent([{ type: "anim", anim: "surf_away", ticks: 30 }]), setTimeout(a, 2e3);
                         setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play();}, 10);
                                     if (this.color === "peedy") {
-             setTimeout(function () {var jump_off_sfx = new Audio("./sfx/peedy_surfgone.mp3"); jump_off_sfx.play();}, 2000)      
+             setTimeout(function () {var jump_off_sfx = new Audio("./sfx/peedy_surfgone.mp3"); jump_off_sfx.play();}, 10);  
                     },
                 },
                 {

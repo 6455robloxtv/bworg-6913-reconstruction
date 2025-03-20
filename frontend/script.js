@@ -86,7 +86,7 @@ function loadBonzis(a) {
         { id: "bonziPurple", src: "./img/bonzi/purple.png" },
         { id: "bonziRed", src: "./img/bonzi/red.png" },
         { id: "bonziPink", src: "./img/bonzi/pink.png" },
-        { id: "bonziSeamus", src: "./img/bonzi/seamus.png" },
+        { id: "bonziInverted", src: "./img/bonzi/seamus.png" },
         { id: "bonziPetey", src: "./img/bonzi/petey.png" },
         { id: "bonziRPC", src: "./img/bonzi/rpc.png" },
         { id: "bonziDogman", src: "./img/bonzi/dogman.png" },
@@ -1171,7 +1171,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                         Object.defineProperty(Array.prototype, "equals", { enumerable: !1 });
                     var loadQueue = new createjs.LoadQueue(),
                         loadDone = [],
-                        loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziRPC","bonziOrange","bonziPeedy","bonziPetey","bonziChief","bonziDogman","bonziProgram","topjej","BonziNoob","BonziPeedy","BonziMerlin","BonziGenie"];
+                        loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziRPC","bonziOrange","bonziPeedy","bonziPetey","bonziChief","bonziDogman","bonziProgram","topjej","BonziNoob","BonziPeedy","BonziMerlin","BonziGenie","BonziInverted"];
                     $(window).load(function () {
                         $("#login_card").show(), $("#login_load").hide(), loadBonzis();
                     });

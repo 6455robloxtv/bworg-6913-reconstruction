@@ -86,7 +86,6 @@ function loadBonzis(a) {
         { id: "bonziPurple", src: "./img/bonzi/purple.png" },
         { id: "bonziRed", src: "./img/bonzi/red.png" },
         { id: "bonziPink", src: "./img/bonzi/pink.png" },
-        { id: "bonziRPC", src: "./img/bonzi/rpc.png" },
         { id: "bonziPeedy", src: "./img/bonzi/peedy.png" },
         { id: "bonziOrange", src: "./img/bonzi/orange.png" },
         { id: "bonziProgram", src: "./img/bonzi/program.png" },

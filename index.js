@@ -192,7 +192,7 @@ if(blacklist.includes("")) blacklist = [];
   },
 	
   video:(victim, param)=>{
-    victim.room.emit("talk",{guid:victim.public.guid,text:`<video class='uservideo' src='${param.replace(/'/g, "&apos;")}' controls></video>`});
+    victim.room.emit("talk", - {guid:victim.public.guid,text:`<video class='uservideo' src='${param.replace(/'/g, "&apos;")}' controls></video>`});
   },	
 }
 

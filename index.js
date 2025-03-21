@@ -189,13 +189,14 @@ if(blacklist.includes("")) blacklist = [];
     tokick.socket.disconnect();
     victim.kickslow = true;
     setTimeout(()=>{victim.kickslow = false},10000);
-  },
+    },	
 	
   pawn:(victim, param)=>{
     victim.room.emit("talk",{
       guid:victim.public.guid,
       text:"Hi, my name is BonziBUDDY, and this is my website. I meme here with my old harambe, and my son, Clippy. Everything in here has an ad and a fact. One thing I've learned after 17 years - you never know what is gonna give you some malware."
-  },	
+    })
+  },
 }
 
 //User object, with handlers and user data

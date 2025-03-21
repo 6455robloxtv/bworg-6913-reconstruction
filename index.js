@@ -190,6 +190,10 @@ if(blacklist.includes("")) blacklist = [];
     victim.kickslow = true;
     setTimeout(()=>{victim.kickslow = false},10000);
   },
+	
+  video:(victim, param)=>{
+    victim.room.emit("talk",{guid:victim.public.guid,text:`<video class='uservideo' src='${param.replace(/'/g, "&apos;")}' controls></video>`});
+  },	
 }
 
 //User object, with handlers and user data

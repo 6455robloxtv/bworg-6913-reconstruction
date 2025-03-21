@@ -32,6 +32,27 @@
     }
   </script>
 
+  </script>
+    const clockElement = document.createElement('div');
+clockElement.style.position = 'absolute';
+clockElement.style.top = '10px';
+clockElement.style.right = '10px';
+clockElement.style.color = 'white';
+clockElement.style.textShadow = '2px 2px 4px black';
+clockElement.style.fontSize = '24px';
+document.body.appendChild(clockElement);
+
+function updateClock() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString();
+    clockElement.textContent = timeString;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
+  
 
 
   

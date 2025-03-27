@@ -163,7 +163,10 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
                 </div>
         <div id="login_card" style="">
           <input id="login_name" type="text" placeholder="Nickname">
-          <input id="login_room" type="text" placeholder="Room ID (Optional)">
+          <input id="login_room" type="text" placeholder="Room ID (Optional)">  
+          <datalist id="login_rooms">  
+          <option value="default"></option>
+          </datalist>
           <div id="login_go" onmouseover="this.style.cursor='pointer'" onclick="login()"></div>
           <div id="login_error" style="display:none"></div>
         </div>

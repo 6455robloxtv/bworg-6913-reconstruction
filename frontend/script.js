@@ -1167,7 +1167,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                         Object.defineProperty(Array.prototype, "equals", { enumerable: !1 });
                     var loadQueue = new createjs.LoadQueue(),
                         loadDone = [],
-                        loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziRPC","bonziOrange","bonziPeedy","bonziPetey","bonziChief","bonziDogman","bonziProgram","topjej","BonziNoob","BonziPeedy","BonziMerlin","BonziGenie","BonziInverted"];
+                        loadNeeded = ["bonziBlack", "bonziBlue", "bonziBrown", "bonziGreen", "bonziPurple", "bonziRed", "bonziPink", "bonziRPC","bonziOrange","bonziPeedy","bonziPetey","bonziChief","bonziDogman","bonziProgram","topjej","BonziNoob","BonziPeedy","BonziMerlin","BonziGenie","BonziInverted","BonziEpicface"];
                     $(window).load(function () {
                         $("#login_card").show(), $("#login_load").hide(), loadBonzis();
                     });

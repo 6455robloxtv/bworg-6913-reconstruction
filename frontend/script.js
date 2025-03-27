@@ -90,6 +90,7 @@ function loadBonzis(a) {
         { id: "bonziOrange", src: "./img/bonzi/orange.png" },
         { id: "bonziProgram", src: "./img/bonzi/program.png" },
         { id: "bonziNoob", src: "./img/bonzi/noob.png" },
+        { id: "bonziEpicface", src: "./img/bonzi/epicface.png" },
     ]),
         loadQueue.on(
             "fileload",

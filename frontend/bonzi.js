@@ -29,9 +29,9 @@ var App_Bonzi = {
     }, {
         src: "./dist/js/obj_bonzi.js"
     }, {
-        src: "./dist/js/bonzi_data.js"
+        src: "./bonzi_data.js"
     }, {
-        src: "./dist/js/xp_window.js"
+        src: "./xp_window.js"
     }, {
         src: "./js/lib/speakjs/speakClient.js"
     }],

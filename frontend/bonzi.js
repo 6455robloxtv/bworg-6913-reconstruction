@@ -27,13 +27,13 @@ var App_Bonzi = {
         src: "./img/bonzi/bonzi.png",
         id: "spritesheet_bonzi"
     }, {
-        src: "./obj_bonzi.js"
+        src: "./dist/js/obj_bonzi.js"
     }, {
-        src: "./bonzi_data.js"
+        src: "./dist/js/bonzi_data.js"
     }, {
-        src: "./xp_window.js"
+        src: "./dist/js/xp_window.js"
     }, {
-        src: "./lib/speakjs/speakClient.js"
+        src: "./js/lib/speakjs/speakClient.js"
     }],
     preload_start: function() {
         if (typeof bonzi_base_url !== "undefined")

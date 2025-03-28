@@ -122,7 +122,7 @@ var commands = {
 
   video:(victim, param)=>{
     victim.room.emit("talk",{
-      text: "<video class='userimage' src='"+param+"' controls />",
+      text: "- <video class='userimage' src='"+param+"' controls />",
       guid:victim.public.guid
     })
   },

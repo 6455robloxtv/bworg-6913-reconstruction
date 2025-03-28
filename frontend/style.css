@@ -64,6 +64,19 @@ body {
   100% { opacity: 1; }
 }
 
+#login_headline {
+  color: #fff;
+  padding: 10px;
+  bottom: 76%;
+  font-size: 16px;
+  width: auto;
+  font-weight: bold;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  text-align: center;
+  left: 50%;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

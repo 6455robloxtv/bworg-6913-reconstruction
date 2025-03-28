@@ -162,15 +162,15 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
         <div id="login_readme">Make sure to check out the <a id="readme" href="readme.html" target="_blank">README</a> before use.<br>
         <input type="checkbox"> I didnt read the <a id="tos" href="rules.html" target="_blank">Rules<span id="updated" hidden="" style="display: inline;"></span></a>.
                 </div>
-<div id="login_card" style="opacity: 0; transition: opacity 0.5s ease-in;" onload="this.style.opacity=1;">
-    <input id="login_name" type="text" placeholder="Nickname">
-    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (optional)">
-    <datalist id="login_rooms">
+<div id="login_card" style="">
+          <input id="login_name" type="text" placeholder="Nickname">
+<input id="login_room" list="login_rooms" type="text" placeholder="Room ID (optional)">
+         <datalist id="login_rooms">
         <option value="default"></option>
         <option value="skits"></option>
         <option value="BonziWORLD Reacts..."></option>
         <option value="AFK"></option>
-    </datalist>
+        </datalist>
     <div id="login_go" onmouseover="this.style.cursor='pointer'" onclick="login()"></div>
     <div id="login_error" style="display:none"></div>
           <div id="login_go" onmouseover="this.style.cursor='pointer'" onclick="login()"></div>

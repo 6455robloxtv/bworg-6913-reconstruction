@@ -720,8 +720,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             this.runSingleEvent([{ type: "anim", anim: "surf_away", ticks: 30 }]), setTimeout(a, 2e3);
                                             setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play()}, 200);
                                                   if (this.color == "peedy") {
-                                            var a = new Audio("peedy_surfintro.mp3");
-                                            a.play();
+                                           setTimeout(function () {var jump_off_sfx = new Audio("./sfx/peedy_surfgone.mp3"); jump_off_sfx.play()}, 200);
                                         },
                                     },
                                     {

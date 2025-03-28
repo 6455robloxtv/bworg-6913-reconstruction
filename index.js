@@ -411,3 +411,8 @@ function markup(tomarkup){
   })
   return tomarkup
 }
+
+// adminstrator admin badge
+if(this.level == 2){
+  this.public.name = "<div class=\"icon\"><i class=\"fas fa-gavel\" title=\"Administrator\" style=\"color: #be6400\" aria-hidden=\"true\"></i><span class=\"sr-only\">Administrator</span></div>" + this.public.name;
+}

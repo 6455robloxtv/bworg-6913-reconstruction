@@ -314,7 +314,7 @@ class user {
 	socket.on("typing", (typer)=>{
     try{
 	if(typer.state == 0) this.public.typing = "";
-	else if(typer.state == 1) this.public.typing = "Is typing...";
+	else if(typer.state == 1) this.public.typing = " Is typing...";
 	else if(typer.state == 2) this.public.typing = " Is commanding...";
     
 	this.room.emit("update", {guid:this.public.guid, userPublic: this.public});

@@ -65,6 +65,18 @@ body {
 }
 
 #login_headline {
+  position: absolute;
+  padding: 4px 3px;
+  border: none;
+  border-radius: 3px;
+  /* box-shadow: 2px 2px 2px #13316f; */
+  outline: none;
+  /* background: #fff; */
+  text-rendering: optimizeLegibility;
+  color: #fff;
+}
+
+#login_headline {
   color: #fff;
   padding: 10px;
   bottom: 76%;

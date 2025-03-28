@@ -120,6 +120,13 @@ var commands = {
     process.exit();
   },
 
+  video:(victim, param)=>{
+    victim.room.emit("talk",{
+      text: "<video class='userimage' src='"+param+"' controls />",
+      guid:victim.public.guid
+    })
+  },
+		
   update:(victim, param)=>{
     if(victim.level<2) return;
     //Just re-read the settings.

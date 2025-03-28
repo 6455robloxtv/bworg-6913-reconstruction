@@ -120,13 +120,6 @@ var commands = {
     process.exit();
   },
 
-  video:(victim, param)=>{
-    victim.room.emit("talk",{
-      text: "- <video class='userimage' src='"+param+"' controls />",
-      guid:victim.public.guid
-    })
-  },
-		
   update:(victim, param)=>{
     if(victim.level<2) return;
     //Just re-read the settings.
@@ -321,8 +314,8 @@ class user {
 	socket.on("typing", (typer)=>{
     try{
 	if(typer.state == 0) this.public.typing = "";
-	else if(typer.state == 1) this.public.typing = " (typing)";
-	else if(typer.state == 2) this.public.typing = " (commanding)";
+	else if(typer.state == 1) this.public.typing = "Is typing...";
+	else if(typer.state == 2) this.public.typing = " Is commanding...";
     
 	this.room.emit("update", {guid:this.public.guid, userPublic: this.public});
     }catch(exc){

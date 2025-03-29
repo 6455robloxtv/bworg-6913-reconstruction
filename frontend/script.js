@@ -513,12 +513,8 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                     (this.needsUpdate = !1),
                                     this.runSingleEvent([{ type: "anim", anim: "surf_intro", ticks: 30 }]);
             setTimeout(function () {var jump_off_sfx = new Audio("./sfx/jump_off.mp3"); jump_off_sfx.play()}, 2000);
-				if ("peedy" === n.color) {
-					new Audio("./sfx/peedy_surfintro.mp3").play();
-                
-        
-    
-            }
+                  
+            
 
                             }
                             return (
@@ -722,11 +718,6 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                         value: function (a) {
                                             this.runSingleEvent([{ type: "anim", anim: "surf_away", ticks: 30 }]), setTimeout(a, 2e3);
                                             setTimeout(function () {var jump_off_sfx = new Audio("./sfx/bye.mp3"); jump_off_sfx.play()}, 200);
-                                            if ("peedy" === n.color) {
-                                                new Audio("./sfx/peedy_surfgone.mp3").play()
-                                            }
-
-    
                                         },
                                     },
                                     {
@@ -1012,7 +1003,7 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                     { type: "text", text: "Help! I'm being oppressed!" },
 
 
-
+                                    
                                 ],
                             ],
                             event_list_fact_open: [[{ type: "html", text: "Hey kids, it's time for a Fun Fact&reg;!", say: "Hey kids, it's time for a Fun Fact!" }]],
